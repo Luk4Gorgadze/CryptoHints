@@ -1,0 +1,41 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id               String        @id @default(cuid())
+  email            String        @unique
+  firstName        String?
+  lastName         String?
+  password         String?
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  subscriptionPlan String?
+  telegramChatId   String?       @unique
+  telegramChat     TelegramChat? @relation(fields: [telegramChatId], references: [id])
+}
+
+model cryptoData {
+  id         String   @id @default(cuid())
+  symbol     String
+  time       DateTime
+  timeVisual String
+  price      Float
+}
+
+model CurrentFetchingCoin {
+  id     String @id @default(cuid())
+  symbol String
+}
+
+model TelegramChat {
+  id     String @id @default(cuid())
+  chatId String
+  User   User?
+}
