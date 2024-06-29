@@ -4,13 +4,16 @@ import { NextResponse, NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
 
-    const { orderID } = req.body
+    const body = await req.json();
+    const { orderID } = body
+    console.log(req.body)
+    console.log("Order ID: ", orderID)
     const PaypalClient = client()
     const request = new paypal.orders.OrdersCaptureRequest(orderID)
     request.requestBody({})
     const response = await PaypalClient.execute(request)
     if (!response) {
-        return res.status(500).json({ success: false, message: "Some Error Occured at backend" })
+        return NextResponse.json({ message: "Some Error Occured at backend" }, { status: 500 })
     }
     return NextResponse.json({ message: "Succesfull captureOrder" }, { status: 200 });
 

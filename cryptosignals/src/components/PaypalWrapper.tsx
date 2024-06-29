@@ -1,6 +1,7 @@
 'use client'
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js'
 import axios from 'axios';
+import { resolve } from 'path';
 
 interface PaypalWrapperProps {
     user_id: string;
@@ -15,8 +16,10 @@ export default function PaypalWrapper({ user_id, order_price }: PaypalWrapperPro
                 user_id,
                 order_price
             })
-            console.log("ORDER ID" + response.data.data.order.order_id)
-            return response.data.data.order.order_id
+            console.log("Response: ", response)
+            let order = response.data.data.order;
+            console.log("Order: ", order.id)
+            return order.id
         } catch (err) {
             // Your custom code to show an error like showing a toast:
             // toast.error('Some Error Occured')
@@ -51,17 +54,17 @@ export default function PaypalWrapper({ user_id, order_price }: PaypalWrapperPro
 
     return (
         <div style={{ colorScheme: 'none' }}>
-            < PayPalScriptProvider
+            <PayPalScriptProvider
                 options={{
-                    clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
+                    'client-id': 'AZhtxZMZJTfwY2oqc-2BDdMJZzAyOYc0khW8T2lc1TchYAb3hqyIGlc3EYR1bvpAct-6D7xnUG6DkeIZ',
                     currency: 'USD',
                     intent: 'capture'
                 }}
             >
                 <PayPalButtons
-                    className='bg-transparent'
                     style={{
                         color: 'gold',
+                        shape: 'rect',
                         label: 'pay',
                         height: 50
                     }}
@@ -71,7 +74,7 @@ export default function PaypalWrapper({ user_id, order_price }: PaypalWrapperPro
                     }}
                     onApprove={async (data, actions) => {
                         let response = await paypalCaptureOrder(data.orderID)
-                        if (response) return;
+                        if (response) return true;
                     }}
                 />
             </PayPalScriptProvider >
