@@ -18,6 +18,8 @@ export default function About() {
                 <li>Daily Updates: Stay informed with fresh signals generated every day, allowing you to adapt your strategy as the market fluctuates.</li>
                 <li>Informed Decisions: Gain valuable insights to empower your investment strategy, not guarantees.</li>
             </ul>
+            <h1 className="text-xl mt-4 font-bold mb-4 text-primary">Reach out for feedback / help: </h1>
+            <p>Contact me via email: luka.g.gorgadze.business@gmail.com</p>
         </div>
     );
 }

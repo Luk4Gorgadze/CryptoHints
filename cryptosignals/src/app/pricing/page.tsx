@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import PaypalWrapper from '@/components/PaypalWrapper';
+import { RegisterLink, LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 export default async function Pricing() {
     const { getUser } = getKindeServerSession();
@@ -41,7 +42,8 @@ export default async function Pricing() {
                             {user && (
                                 <PaypalWrapper user_id={user.id} order_price={2.99} />)}
                             {!user && (
-                                <Button className="mt-5">Get Started</Button>)
+                                <LoginLink className="mt-5"><Button className="w-[100%]">Get Started</Button></LoginLink>
+                            )
                             }
                         </div>
                         <div className="mt-5 md:mt-0 justify-between flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-background dark:text-white">
