@@ -11,7 +11,7 @@ export default async function Pricing() {
 
 
     return (
-        <div className="about-page mx-autow-[80%] text-black dark:text-white mb-20" >
+        <div className="about-page mx-autow-[80%] text-black dark:text-white mb-[250px]" >
             <section className="">
                 <div className="px-4 mx-auto max-w-screen-xl lg:px-6">
                     <div className="lg:flex sm:gap-6 xl:gap-10">

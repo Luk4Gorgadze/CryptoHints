@@ -9,20 +9,23 @@ const bot = new TelegramBot(botToken, { polling: true });
 bot.onText(/\/start/, async (msg) => {
     let tChat;
     console.log("message received", msg.chat.username)
-    if (msg.chat.id) {
+
+    if (msg.chat.id && msg.chat.username) {
         tChat = await prisma.telegramChat.findFirst({
             where: {
-                chatId: msg.chat.id.toString()
+                chatId: msg.chat.id.toString(),
+                Username: msg.chat.username
             }
         });
     }
-    if (tChat == null) {
+    if (tChat == null && msg.chat.username) {
         await prisma.telegramChat.create({
             data: {
-                chatId: msg.chat.id.toString()
+                chatId: msg.chat.id.toString(),
+                Username: msg.chat.username
             }
         });
-        bot.sendMessage(msg.chat.id, 'Hello! I am an amazing crypto hints bot, I will send you the best crypto signals!');
+        bot.sendMessage(msg.chat.id, 'hey there! from now on you will receive daily crypto signals, happy trading!');
     }
 
 });

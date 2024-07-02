@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function About() {
     return (
-        <div className="about-page mx-auto py-8 w-[80%] text-black dark:text-white">
+        <div className="about-page mx-auto py-8 w-[80%] text-black dark:text-white mb-[200px]">
             <h1 className="text-xl font-bold mb-4 text-primary">About CryptoHints</h1>
             <p>
                 CryptoHints empowers you to navigate the ever-changing cryptocurrency market with timely insights delivered directly to your Telegram chats. We utilize the Moving Average Convergence Divergence (MACD) indicator on daily charts to identify potential buying opportunities for leading cryptocurrencies like Bitcoin (BTC), Ethereum (ETH), Ripple (XRP), Litecoin (LTC) - all paired with USDT (Tether).

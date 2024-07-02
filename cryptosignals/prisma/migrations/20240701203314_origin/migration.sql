@@ -1,6 +1,5 @@
--- RedefineTables
-PRAGMA foreign_keys=OFF;
-CREATE TABLE "new_User" (
+-- CreateTable
+CREATE TABLE "User" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "email" TEXT NOT NULL,
     "firstName" TEXT,
@@ -12,10 +11,31 @@ CREATE TABLE "new_User" (
     "telegramChatId" TEXT,
     CONSTRAINT "User_telegramChatId_fkey" FOREIGN KEY ("telegramChatId") REFERENCES "TelegramChat" ("id") ON DELETE SET NULL ON UPDATE CASCADE
 );
-INSERT INTO "new_User" ("createdAt", "email", "firstName", "id", "lastName", "password", "subscriptionPlan", "telegramChatId", "updatedAt") SELECT "createdAt", "email", "firstName", "id", "lastName", "password", "subscriptionPlan", "telegramChatId", "updatedAt" FROM "User";
-DROP TABLE "User";
-ALTER TABLE "new_User" RENAME TO "User";
+
+-- CreateTable
+CREATE TABLE "cryptoData" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "symbol" TEXT NOT NULL,
+    "time" DATETIME NOT NULL,
+    "timeVisual" TEXT NOT NULL,
+    "price" REAL NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "CurrentFetchingCoin" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "symbol" TEXT NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "TelegramChat" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "chatId" TEXT,
+    "Username" TEXT NOT NULL
+);
+
+-- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "User_telegramChatId_key" ON "User"("telegramChatId");
-PRAGMA foreign_key_check("User");
-PRAGMA foreign_keys=ON;
