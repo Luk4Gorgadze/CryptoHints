@@ -97,7 +97,6 @@ export default function PaypalWrapper({ user_id, order_price, onPaymentSuccess }
                                 return order_id + '';
                             }}
                             onApprove={async (data, actions) => {
-                                setSubscriptionPlan('A');
                                 await paypalCaptureOrder(data.orderID);
                                 return undefined;
                             }}
