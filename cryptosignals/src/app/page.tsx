@@ -1,6 +1,6 @@
-import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
-import MyLineChart from "@/components/MyLineChart";
-import TransitionLink from "@/components/TransitionLink";
+import { TextGenerateEffect } from "../components/ui/text-generate-effect";
+import MyLineChart from "../components/MyLineChart";
+import TransitionLink from "../components/TransitionLink";
 
 export default async function Home() {
 

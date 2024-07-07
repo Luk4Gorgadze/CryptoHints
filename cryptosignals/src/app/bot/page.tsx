@@ -1,8 +1,8 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { Button } from "../../components/ui/button"
+import { Input } from "../../components/ui/input"
 import { Toaster, toast } from 'sonner'
 
 
