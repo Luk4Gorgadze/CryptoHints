@@ -97,15 +97,13 @@ const fetchBulkCoinData = async (coinSymbol: string) => {
                         parse_mode: 'Markdown',
                     }, { headers });
                 }
-                // else {
-                //     const message = `
-                //     *Neutral Signal for ${coinSymbol}* 🔴\n\n*Type:* *Neutral*`;
-                //     let response = await axios.post(process.env.KINDE_SITE_URL + '/api/bot', {
-                //         message: message,
-                //         parse_mode: 'Markdown',
-                //     }, { headers });
+                else {
+                    const message = `NOTHING`;
+                    let response = await axios.post(process.env.KINDE_SITE_URL + '/api/bot', {
+                        message: message,
+                    }, { headers });
 
-                // }
+                }
             }
 
             if (coinNotification && current_time.getTime() > coinNotification.updatedAt.getTime() + timeOffset) {

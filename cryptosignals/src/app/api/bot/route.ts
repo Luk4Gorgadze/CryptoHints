@@ -12,9 +12,13 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json();
     const { message } = body;
+    if (message !== "NOTHING") {
+        sendMessageToAllChats(message);
 
-    sendMessageToAllChats(message);
-
-    return NextResponse.json({ message: "Started sending messages to users" }, { status: 200 });
+        return NextResponse.json({ message: "Started sending messages to users" }, { status: 200 });
+    }
+    else {
+        return NextResponse.json({ message: "Keeping bot route alive" }, { status: 200 });
+    }
 
 }
