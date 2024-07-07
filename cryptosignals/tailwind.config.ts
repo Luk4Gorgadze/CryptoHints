@@ -20,9 +20,6 @@ const config = {
     },
     extend: {
       colors: {
-        fontFamily: {
-          sans: ["var(--font-sans)", ...fontFamily.sans],
-        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
