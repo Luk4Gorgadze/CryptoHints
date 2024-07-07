@@ -1,9 +1,5 @@
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import MyLineChart from "@/components/MyLineChart";
-import BTC_image from "@/app/BTC.gif";
-import Image from 'next/image';
-import { Button } from "@/components/ui/button"
-import { useState } from "react";
 import TransitionLink from "@/components/TransitionLink";
 
 export default async function Home() {
@@ -43,7 +39,7 @@ export default async function Home() {
                             color="dark:text-white text-black"
                             className="text-black dark:text-white" />
                     </header>
-                    <TransitionLink href='/pricing'><div className="mt-5 text-base bg-primary rounded-sm px-5 py-2 dark:text-white font-medium">Get Started</div></TransitionLink>
+                    <TransitionLink href="/pricing"><div className="mt-5 text-base bg-primary rounded-sm px-5 py-2 dark:text-white font-medium">Get Started</div></TransitionLink>
                 </div>
                 <div className="IndexGif mt-[50px] md:mt-0 md:w-1/2 ">
                     <img src="/BTC.gif" alt="My Image" className="object-cover h-full w-full rounded-xl" />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export default function About() {
     return (
@@ -9,7 +9,7 @@ export default function About() {
             </p>
             <div className="disclaimer mt-4">
                 <p className="text-xl mt-4 font-bold text-primary ">Important Disclaimer:</p>
-                <p className="mt-4">CryptoHints is an automation tool and does not guarantee profits. The cryptocurrency market is inherently volatile, and past performance is not necessarily indicative of future results. Our signals are for informational purposes only and should not be considered financial advice. It's crucial to conduct your own research, understand market conditions, and consider your risk tolerance before making any investment decisions.</p>
+                <p className="mt-4">CryptoHints is an automation tool and does not guarantee profits. The cryptocurrency market is inherently volatile, and past performance is not necessarily indicative of future results. Our signals are for informational purposes only and should not be considered financial advice. It&apos;s crucial to conduct your own research, understand market conditions, and consider your risk tolerance before making any investment decisions.</p>
             </div>
             <h2 className="text-xl mt-4 text-primary font-bold">Why Choose CryptoHints?</h2>
             <ul className="list-disc ml-4 mt-4">
