@@ -61,6 +61,7 @@ export default function Bot() {
                         <Button type="submit" onClick={handleSubscribe}>Subscribe</Button>
                     </div>
                     <div className='mt-5'>After subscribing, chat with:  <a href='https://t.me/crypto_hints_bot' className="text-blue-600">CryptoHints Bot</a>. Run command <span className='font-bold'>`/start`</span> to receive signals</div>
+                    <div className='mt-5'>NOTE: be patient with bot, it will respond to your command in 1 minute as our APIs get executed once every minute</div>
                 </div>
             )}
             {!subscriptionPlan && <div className='text-lg font-bold'>You need subscription to see the bot manual on this page</div>}
