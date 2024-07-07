@@ -5,7 +5,7 @@ import prisma from '@/lib/prisma';
 
 let botInstance: any = null;
 if (process.env.NODE_ENV === "production") {
-    botInstance = new TelegramBot(process.env.BOT_TOKEN!, { polling: false });
+    botInstance = new TelegramBot(process.env.BOT_TOKEN!, { polling: true });
 }
 else { // @ts-ignore
     if (!global.botInstance) { // @ts-ignore
