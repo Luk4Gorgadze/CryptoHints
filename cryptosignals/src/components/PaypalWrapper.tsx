@@ -36,10 +36,12 @@ export default function PaypalWrapper({ user_id, order_price, onPaymentSuccess }
     const paypalCaptureOrder = async (orderID: string) => {
         try {
             let response = await axios.post('/api/paypal/captureOrder', { orderID });
+            console.log(response.data);
 
-            if (response.data.success) {
-                onPaymentSuccess(); // Trigger the callback
-                // router.reload(); // Reload the page
+            if (response.data.operationDone == true) {
+                console.log('Payment Success')
+                onPaymentSuccess();
+                setSubscriptionPlan('A');
             }
         } catch (err) {
             console.error(err);
