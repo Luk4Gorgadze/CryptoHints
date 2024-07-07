@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
                 {
                     amount: {
                         currency_code: 'USD',
-                        value: order_price + "",
+                        value: 0.01 + "",
                     },
                 },
             ],
