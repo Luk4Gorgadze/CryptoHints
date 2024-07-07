@@ -1,7 +1,7 @@
 import client from "../../../../utils/paypal/client";
 import paypal from '@paypal/checkout-server-sdk'
 import { NextResponse, NextRequest } from "next/server";
-import prisma from "../../../../lib/prisma";
+import prisma from "@/lib/prisma";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 export async function POST(req: NextRequest) {

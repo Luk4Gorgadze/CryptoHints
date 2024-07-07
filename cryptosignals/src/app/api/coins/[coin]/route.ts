@@ -1,6 +1,7 @@
 'use server'
-import prisma from "../../../../lib/prisma";
+import prisma from "@/lib/prisma";
 import { NextResponse, NextRequest } from "next/server";
+import taapiClient from "@/lib/taapiClient";
 
 export async function GET(req: NextRequest, route: { params: { coin: string } }) {
     let current_symbol = route.params.coin.toUpperCase();

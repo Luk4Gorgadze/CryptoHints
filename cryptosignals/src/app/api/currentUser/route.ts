@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import prisma from "../../../lib/prisma";
+import prisma from "@/lib/prisma";
 import { m } from "framer-motion";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 export async function GET() {
