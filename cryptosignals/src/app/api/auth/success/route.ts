@@ -20,7 +20,6 @@ export async function GET() {
         }
         // create user if does not currently exist in database
         if (dbUser == null) {
-            console.log("I AM INSIDE 2");
             dbUser = await prisma.user.create({
                 data: {
                     id: user.id,
@@ -31,7 +30,7 @@ export async function GET() {
             });
         }
 
-        return NextResponse.redirect("http://localhost:3000/");
+        return NextResponse.redirect(process.env.KINDE_SITE_URL ?? ""); // Provide a default value for process.env.KINDE_SITE_URL
     } catch (error) {
         console.error("Error in GET request:", error);
     } finally {

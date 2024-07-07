@@ -2,18 +2,20 @@
 import prisma from "@/lib/prisma";
 import { NextResponse, NextRequest } from "next/server";
 import taapiClient from "@/lib/taapiClient";
-
+import { validateToken } from "@/lib/helpers";
+import axios from 'axios';
 const symbols = ['BTC', 'ETH', 'XRP', 'LTC'];
-const VALID_TOKEN = process.env.COIN_API_POST_KEY;  // Replace with your actual token
+
 
 
 const fetchBulkCoinData = async (coinSymbol: string) => {
     taapiClient.resetBulkConstructs();
-    taapiClient.addCalculation("price", `${coinSymbol}/USDT`, "1m", 'coin');
-    taapiClient.addCalculation("macd", `${coinSymbol}/USDT`, "1m", 'macd');
+    taapiClient.addCalculation("price", `${coinSymbol}/USDT`, "15m", 'coin');
+    taapiClient.addCalculation("macd", `${coinSymbol}/USDT`, "15m", 'macd');
     taapiClient.executeBulk().then(results => {
 
         const processData = async (coinSymbol, timeNow, current_time, data, prisma) => {
+            detectTrend(data, coinSymbol);
             await prisma.cryptoData.create({
                 data: {
                     symbol: coinSymbol,
@@ -44,8 +46,87 @@ const fetchBulkCoinData = async (coinSymbol: string) => {
                 }
             }
         };
+        type CoinData = {
+            value: number;
+        };
 
-        console.log(results);
+        type MACDData = {
+            valueMACD: number;
+            valueMACDSignal: number;
+            valueMACDHist: number;
+        };
+
+        type MarketData = {
+            coin: CoinData;
+            macd: MACDData;
+        };
+
+        type Signal = {
+            type: 'bullish' | 'bearish' | 'neutral';
+            message: string;
+        };
+
+        const detectTrend = async (marketData: MarketData, coinSymbol: String): Signal => {
+            const { valueMACD, valueMACDSignal, valueMACDHist } = marketData.macd;
+            let coinNotification = await prisma.coinNotification.findFirst({
+                where: {
+                    symbol: coinSymbol
+                }
+            });
+
+            let current_time = new Date();
+            let timeOffset = 1 * 60 * 1000;
+
+
+            const headers = {
+                'Authorization': process.env.COIN_API_POST_KEY
+            };
+            if (coinNotification && current_time.getTime() > coinNotification.updatedAt.getTime() + timeOffset) {
+                if (valueMACD > valueMACDSignal && valueMACDHist > 0 && valueMACD < 0 && valueMACDSignal < 0) {
+                    const message = `
+                    *Strong Buy Signal for ${coinSymbol}* 🟢\n\n*Type:* *Bullish*`;
+                    let response = await axios.post(process.env.KINDE_SITE_URL + '/api/bot', {
+                        message: message,
+                        parse_mode: 'Markdown',
+                    }, { headers });
+                } else if (valueMACD < valueMACDSignal && valueMACDHist < 0 && valueMACD > 0 && valueMACDSignal > 0) {
+                    const message = `
+                    *Strong Sell Signal for ${coinSymbol}* 🔴\n\n*Type:* *Bearish*`;
+                    let response = await axios.post(process.env.KINDE_SITE_URL + '/api/bot', {
+                        message: message,
+                        parse_mode: 'Markdown',
+                    }, { headers });
+                }
+                // else {
+                //     const message = `
+                //     *Neutral Signal for ${coinSymbol}* 🔴\n\n*Type:* *Neutral*`;
+                //     let response = await axios.post(process.env.KINDE_SITE_URL + '/api/bot', {
+                //         message: message,
+                //         parse_mode: 'Markdown',
+                //     }, { headers });
+
+                // }
+            }
+
+            if (coinNotification && current_time.getTime() > coinNotification.updatedAt.getTime() + timeOffset) {
+                await prisma.coinNotification.update({
+                    where: { id: coinNotification.id },
+                    data: {
+                        updatedAt: current_time,
+                    }
+                });
+            }
+            else if (!coinNotification) {
+                await prisma.coinNotification.create({
+                    data: {
+                        symbol: coinSymbol,
+                        updatedAt: current_time,
+                    }
+                });
+            }
+
+        }
+
         let date = new Date();
         let hour = date.getHours();
         let minute = date.getMinutes();
@@ -61,15 +142,6 @@ const fetchBulkCoinData = async (coinSymbol: string) => {
 }
 
 
-const validateToken = (req) => {
-    const authHeader = req.headers.get('Authorization');
-    if (!authHeader) {
-        console.log('no auth header')
-        return false;
-    }
-
-    return authHeader === VALID_TOKEN;
-};
 
 const fetchNextCoin = async () => {
     let currentCoin = await prisma.currentFetchingCoin.findFirst();
@@ -82,7 +154,6 @@ const fetchNextCoin = async () => {
 
     const currentSymbol = currentCoin.symbol;
     await fetchBulkCoinData(currentSymbol);
-    console.log('fetching coin data for', currentSymbol)
 
     // Update to next symbol
     const currentIndex = symbols.indexOf(currentSymbol);

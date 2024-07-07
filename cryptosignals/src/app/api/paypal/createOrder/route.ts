@@ -15,7 +15,6 @@ export async function POST(req: NextRequest) {
         const request = new paypal.orders.OrdersCreateRequest()
         const body = await req.json();
         const { user_id, order_price } = body;
-        console.log("USER ID: ", user_id, order_price)
         request.headers['prefer'] = 'return=representation'
         request.requestBody({
             intent: 'CAPTURE',
@@ -30,11 +29,9 @@ export async function POST(req: NextRequest) {
         })
         const response = await PaypalClient.execute(request)
         if (response.statusCode !== 201) {
-            console.log("RES: ", response)
             return NextResponse.json({ message: "Some Error Occured at backend" }, { status: 500 })
         }
         const order = response.result;
-        console.log("Order: ", order)
         // update user's subscription here
         await prisma.user.update({
             where: { id: user?.id },
@@ -44,7 +41,6 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ message: "Succesfully created order", data: { order } }, { status: 200 });
     }
     catch (err) {
-        console.log("Err at Create Order: ", err)
         return NextResponse.json({ message: "Failed purchase" }, { status: 401 });
     }
 }

@@ -3,11 +3,8 @@ import paypal from '@paypal/checkout-server-sdk'
 import { NextResponse, NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
-
     const body = await req.json();
     const { orderID } = body
-    console.log(req.body)
-    console.log("Order ID: ", orderID)
     const PaypalClient = client()
     const request = new paypal.orders.OrdersCaptureRequest(orderID)
     request.requestBody({})

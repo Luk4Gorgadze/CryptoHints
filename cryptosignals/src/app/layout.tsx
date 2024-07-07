@@ -6,6 +6,8 @@ import Navbar from '@/components/Navbar';
 import { ThemeProvider } from "@/components/Theme-provider"
 import '@mantine/charts/styles.css';
 import Footer from "@/components/Footer";
+import { Toaster, toast } from 'sonner'
+
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -30,10 +32,11 @@ export default function RootLayout({
       )}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
+          <Toaster richColors position="bottom-right" />
           <Navbar />{children}
           <Footer />
         </ThemeProvider>

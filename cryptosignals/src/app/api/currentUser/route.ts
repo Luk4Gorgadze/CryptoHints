@@ -11,7 +11,6 @@ export async function GET() {
         dbUser = await prisma.user.findUnique({
             where: { email: user?.email ?? undefined }
         });
-        console.log(user.email, dbUser, "MY USER")
     }
     return NextResponse.json({ message: "User Found", data: dbUser }, { status: 200 });
 }

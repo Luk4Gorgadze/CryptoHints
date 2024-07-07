@@ -13,13 +13,14 @@ export default function About() {
             </div>
             <h2 className="text-xl mt-4 text-primary font-bold">Why Choose CryptoHints?</h2>
             <ul className="list-disc ml-4 mt-4">
-                <li>Seamless Communication: Receive clear buy signals directly in your Telegram chats.</li>
+                <li>Seamless Communication: Receive clear buy/sell signals directly in your Telegram chats.</li>
                 <li>Focus on Top Cryptos: Track signals for established cryptocurrencies with high market capitalization.</li>
                 <li>Daily Updates: Stay informed with fresh signals generated every day, allowing you to adapt your strategy as the market fluctuates.</li>
                 <li>Informed Decisions: Gain valuable insights to empower your investment strategy, not guarantees.</li>
             </ul>
             <h1 className="text-xl mt-4 font-bold mb-4 text-primary">Reach out for feedback / help: </h1>
-            <p>Contact me via email: luka.g.gorgadze.business@gmail.com</p>
+            <p>Contact me via email: <a href="mailto:luka.g.gorgadze.business@gmail.com" className="text-blue-600 underline">luka.g.gorgadze.business@gmail.com</a></p>
+
         </div>
     );
 }

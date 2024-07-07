@@ -4,6 +4,7 @@ import BTC_image from "@/app/BTC.gif";
 import Image from 'next/image';
 import { Button } from "@/components/ui/button"
 import { useState } from "react";
+import TransitionLink from "@/components/TransitionLink";
 
 export default async function Home() {
 
@@ -37,12 +38,12 @@ export default async function Home() {
                     <header className="text-xl font-medium relative max-w-[800px] w-full py-3 md:items-center md:justify-between dark:bg-background">
                         <span className=""> </span>
                         <TextGenerateEffect
-                            words="This webservice only provides good moments and signals to automate the process of trading with crypto coins and does not guarantee that users will gain profits. Use this tool with caution"
+                            words="Our webservice provides good moments and signals to automate the process of trading with crypto coins and does not guarantee that users will gain profits. Use this tool with caution"
                             fontSize="text-xl"
                             color="dark:text-white text-black"
                             className="text-black dark:text-white" />
                     </header>
-                    <Button className="mt-5">Get Started</Button>
+                    <TransitionLink href='/pricing'><div className="mt-5 text-base bg-primary rounded-sm px-5 py-2 dark:text-white font-medium">Get Started</div></TransitionLink>
                 </div>
                 <div className="IndexGif mt-[50px] md:mt-0 md:w-1/2 ">
                     <img src="/BTC.gif" alt="My Image" className="object-cover h-full w-full rounded-xl" />

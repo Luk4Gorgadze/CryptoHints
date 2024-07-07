@@ -29,7 +29,6 @@ export default function LineGraph() {
                 })
                 .then(data => {
                     setCryptoData(data.data);
-                    console.log(data.data, selectedCoin);
                 })
                 .catch(error => {
                     console.error('Error fetching coin data:', error);
