@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
         let telegramChat;
 
         let currentUser = await prisma.user.findUnique({
-            where: { email: user.email }
+            where: { email: user?.email ? user.email : '' }
         });
 
         if (currentUser?.telegramChatId) {
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
             });
         } else {
             await prisma.telegramChat.update({
-                where: { id: currentUser?.telegramChatId },
+                where: { id: currentUser?.telegramChatId ? currentUser.telegramChatId : "" },
                 data: {
                     Username: telegramUsername
                 }

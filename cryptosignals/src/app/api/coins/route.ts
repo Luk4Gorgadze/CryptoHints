@@ -14,7 +14,7 @@ const fetchBulkCoinData = async (coinSymbol: string) => {
     taapiClient.addCalculation("macd", `${coinSymbol}/USDT`, "15m", 'macd');
     taapiClient.executeBulk().then(results => {
 
-        const processData = async (coinSymbol, timeNow, current_time, data, prisma) => {
+        const processData = async (coinSymbol: any, timeNow: any, current_time: any, data: any, prisma: any) => {
             detectTrend(data, coinSymbol);
             await prisma.cryptoData.create({
                 data: {
@@ -66,7 +66,7 @@ const fetchBulkCoinData = async (coinSymbol: string) => {
             message: string;
         };
 
-        const detectTrend = async (marketData: MarketData, coinSymbol: String): Signal => {
+        const detectTrend = async (marketData: MarketData, coinSymbol: any): Promise<void> => {
             const { valueMACD, valueMACDSignal, valueMACDHist } = marketData.macd;
             let coinNotification = await prisma.coinNotification.findFirst({
                 where: {

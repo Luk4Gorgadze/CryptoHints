@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
     const { orderID } = body
     const PaypalClient = client()
     const request = new paypal.orders.OrdersCaptureRequest(orderID)
-    request.requestBody({})
+    // request.requestBody({})
     const response = await PaypalClient.execute(request)
     if (!response) {
         return NextResponse.json({ message: "Some Error Occured at backend" }, { status: 500 })
