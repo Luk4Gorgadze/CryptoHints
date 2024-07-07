@@ -1,8 +1,7 @@
 'use server'
-import { validateToken } from '@/lib/helpers';
-import prisma from '@/lib/prisma';
+import { validateToken } from '../../../lib/helpers';
 import { NextRequest, NextResponse } from 'next/server';
-import { sendMessageToAllChats } from '@/lib/telegramBot';
+import { sendMessageToAllChats } from '../../../lib/telegramBot';
 
 
 export async function POST(req: NextRequest) {

@@ -1,8 +1,8 @@
 'use server'
-import prisma from "@/lib/prisma";
+import prisma from '../../../lib/prisma';
 import { NextResponse, NextRequest } from "next/server";
-import taapiClient from "@/lib/taapiClient";
-import { validateToken } from "@/lib/helpers";
+import taapiClient from "../../../lib/taapiClient";
+import { validateToken } from "../../../lib/helpers";
 import axios from 'axios';
 const symbols = ['BTC', 'ETH', 'XRP', 'LTC'];
 

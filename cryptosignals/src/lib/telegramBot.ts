@@ -1,6 +1,6 @@
 // lib/telegrambot.ts
 import TelegramBot from 'node-telegram-bot-api';
-import prisma from '@/lib/prisma';
+import prisma from '../lib/prisma';
 
 
 let botInstance: any = null;
