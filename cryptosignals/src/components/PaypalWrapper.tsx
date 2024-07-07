@@ -12,7 +12,7 @@ interface PaypalWrapperProps {
 }
 
 export default function PaypalWrapper({ user_id, order_price, onPaymentSuccess }: PaypalWrapperProps) {
-    const [subscriptionPlan, setSubscriptionPlan] = useState(null);
+    const [subscriptionPlan, setSubscriptionPlan] = useState('');
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
@@ -39,7 +39,7 @@ export default function PaypalWrapper({ user_id, order_price, onPaymentSuccess }
 
             if (response.data.success) {
                 onPaymentSuccess(); // Trigger the callback
-                router.reload(); // Reload the page
+                // router.reload(); // Reload the page
             }
         } catch (err) {
             console.error(err);
@@ -77,7 +77,7 @@ export default function PaypalWrapper({ user_id, order_price, onPaymentSuccess }
             {!subscriptionPlan && (
                 <PayPalScriptProvider
                     options={{
-                        'client-id': 'AZhtxZMZJTfwY2oqc-2BDdMJZzAyOYc0khW8T2lc1TchYAb3hqyIGlc3EYR1bvpAct-6D7xnUG6DkeIZ',
+                        clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID ? process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID : '',
                         currency: 'USD',
                         intent: 'capture'
                     }}
@@ -96,8 +96,8 @@ export default function PaypalWrapper({ user_id, order_price, onPaymentSuccess }
                             }}
                             onApprove={async (data, actions) => {
                                 setSubscriptionPlan('A');
-                                let response = await paypalCaptureOrder(data.orderID);
-                                if (response) return true;
+                                await paypalCaptureOrder(data.orderID);
+                                return undefined;
                             }}
                         />
                     </div>

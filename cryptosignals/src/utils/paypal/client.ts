@@ -5,8 +5,8 @@ const configureEnvironment = function () {
     const clientSecret = process.env.PAYPAL_CLIENT_SECRET
 
     return process.env.NODE_ENV === 'production'
-        ? new checkoutNodeJssdk.core.LiveEnvironment(clientId, clientSecret)
-        : new checkoutNodeJssdk.core.SandboxEnvironment(clientId, clientSecret)
+        ? new checkoutNodeJssdk.core.LiveEnvironment(clientId ? clientId : '', clientSecret ? clientSecret : '')
+        : new checkoutNodeJssdk.core.SandboxEnvironment(clientId ? clientId : '', clientSecret ? clientSecret : '')
 }
 
 const client = function () {

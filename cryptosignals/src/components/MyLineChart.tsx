@@ -19,7 +19,7 @@ export default function LineGraph() {
     const [cryptoData, setCryptoData] = useState([]);
 
     useEffect(() => {
-        const fetchCoinData = (coin) => {
+        const fetchCoinData = (coin: any) => {
             fetch(`/api/coins/${coin}`)
                 .then(response => {
                     if (!response.ok) {

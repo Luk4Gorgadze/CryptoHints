@@ -2,19 +2,20 @@
 import TelegramBot from 'node-telegram-bot-api';
 import prisma from '@/lib/prisma';
 
-let botInstance: TelegramBot | null = null;
+
+let botInstance: any = null;
 if (process.env.NODE_ENV === "production") {
     botInstance = new TelegramBot(process.env.BOT_TOKEN!, { polling: false });
 }
-else {
-    if (!global.botInstance) {
+else { // @ts-ignore
+    if (!global.botInstance) { // @ts-ignore
         global.botInstance = new TelegramBot(process.env.BOT_TOKEN!, { polling: true });
-    }
+    }// @ts-ignore
     botInstance = global.botInstance;
 }
 
 
-botInstance.onText(/\/start/, async (msg) => {
+botInstance.onText(/\/start/, async (msg: any) => {
     let tChat;
     if (msg.chat.id && msg.chat.username) {
         tChat = await prisma.telegramChat.findFirst({
@@ -42,7 +43,7 @@ const sendMessageToAllChats = async (message: string) => {
 
     await Promise.all(telegramChats.map(chat => {
         if (chat.chatId?.valueOf() !== null) {
-            let chtId = parseInt(chat.chatId);
+            let chtId = parseInt(chat.chatId ? chat.chatId : '');
             botInstance.sendMessage(chtId, message, { parse_mode: 'Markdown' });
         }
     }));
