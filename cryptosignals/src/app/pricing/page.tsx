@@ -1,5 +1,5 @@
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import PriceCards from "../../components/PriceCards";
+import PriceCards from "@/components/PriceCards";
 
 export default async function Pricing() {
     const { getUser } = getKindeServerSession();

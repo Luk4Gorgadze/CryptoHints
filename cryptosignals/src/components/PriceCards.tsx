@@ -1,6 +1,6 @@
 'use client'
-import { Button } from '../components/ui/button';
-import PaypalWrapper from '../components/PaypalWrapper';
+import { Button } from '@/components/ui/button';
+import PaypalWrapper from '@/components/PaypalWrapper';
 import { RegisterLink, LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { useState } from 'react';
 
