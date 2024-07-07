@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
         const request = new paypal.orders.OrdersCreateRequest()
         const body = await req.json();
         const { user_id, order_price } = body;
-        request.headers['prefer'] = 'return=representation'
+        request.headers['Prefer'] = 'return=representation'
         request.requestBody({
             intent: 'CAPTURE',
             purchase_units: [
