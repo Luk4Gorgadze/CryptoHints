@@ -1,6 +1,7 @@
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import MyLineChart from "@/components/MyLineChart";
 import TransitionLink from "@/components/TransitionLink";
+import Head from 'next/head';
 
 export default async function Home() {
 
@@ -8,6 +9,14 @@ export default async function Home() {
 
     return (
         <div className="flex flex-col justify-start flex-nowrap z-50 text-sm w-[80%] mx-auto">
+            <Head>
+                <title>CryptoHints</title>
+                <meta property="og:title" content="CryptoHints" />
+                <meta property="og:description" content="Daily crypto signals for beginner traders" />
+                <meta property="og:image" content="https://cryptohints.luking.pro/CryptoHints-Dark.png" />
+                <meta property="og:url" content="https://cryptohints.luking.pro/" />
+                <meta name="twitter:card" content="summary_large_image" />
+            </Head>
             <div className="flex md:flex-row flex-col justify-between">
                 <div className="IndexHeaders md:w-1/3">
                     <header className="text-3xl font-bold relative w-full py-3 md:items-center md:justify-between lg:xl:mx-auto dark:bg-background">
