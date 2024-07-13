@@ -15,8 +15,8 @@ const fontSans = FontSans({
 })
 
 export const metadata: Metadata = {
-  title: "Crypto Hints",
-  description: "Crypto signals for beginners",
+  title: "CryptoHints",
+  description: "Daily crypto signals for beginner traders",
 };
 
 export default function RootLayout({
