@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/Theme-provider"
 import '@mantine/charts/styles.css';
 import Footer from "@/components/Footer";
 import { Toaster, toast } from 'sonner'
+import Head from "next/head";
 
 
 const fontSans = FontSans({
@@ -31,6 +32,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head>
+        <script defer src="https://umami.luking.pro/script.js" data-website-id="f0238a5b-5f2d-4ef9-b4c6-c5ed4da22c78"></script>
+      </Head>
       <body className={cn(
         "min-h-screen bg-background font-sans antialiased",
         fontSans.variable
