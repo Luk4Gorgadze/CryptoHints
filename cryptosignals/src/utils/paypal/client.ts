@@ -4,10 +4,9 @@ const configureEnvironment = function () {
     const clientId = process.env.PAYPAL_CLIENT_ID
     const clientSecret = process.env.PAYPAL_CLIENT_SECRET
 
-    // return process.env.NODE_ENV === 'production'
-    // ? new checkoutNodeJssdk.core.LiveEnvironment(clientId ? clientId : '', clientSecret ? clientSecret : '')
-    // : new checkoutNodeJssdk.core.SandboxEnvironment(clientId ? clientId : '', clientSecret ? clientSecret : '')
-    return new checkoutNodeJssdk.core.SandboxEnvironment(clientId ? clientId : '', clientSecret ? clientSecret : '')
+    return process.env.MY_ENV === 'production'
+        ? new checkoutNodeJssdk.core.LiveEnvironment(clientId ? clientId : '', clientSecret ? clientSecret : '')
+        : new checkoutNodeJssdk.core.SandboxEnvironment(clientId ? clientId : '', clientSecret ? clientSecret : '')
 }
 
 const client = function () {
