@@ -15,8 +15,13 @@ const fontSans = FontSans({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://dev-cryptohints.luking.pro'),
   title: "CryptoHints",
   description: "Daily crypto signals for beginner traders",
+  openGraph: {
+    images: '/CryptoHints-Dark.png',
+  },
+
 };
 
 export default function RootLayout({
