@@ -1,4 +1,4 @@
-## CryptoHints - Built in Next js
+## 🟡 CryptoHints - Built in Next js
 
 [Check website](https://cryptohints.luking.pro/)
 
