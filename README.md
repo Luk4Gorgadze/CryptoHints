@@ -1,6 +1,6 @@
 ## CryptoHints - Built in Next js
 
-![Check website](https://cryptohints.luking.pro/)
+[Check website](https://cryptohints.luking.pro/)
 
 **Startup idea**: provide accurate crypto signals for daily traders and help them make profits
 
